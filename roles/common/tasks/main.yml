@@ -1,0 +1,10 @@
+---
+# tasks file for common
+# CentOS specific package installations
+
+- include: redhat.yml
+  when: ansible_os_family  == "RedHat"
+
+# Ubuntu specific package installations
+- include: debian.yml
+  when: ansible_os_family  == "Debian"

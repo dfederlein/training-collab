@@ -1,0 +1,17 @@
+---
+- name: test for libselinux-python
+  shell: "rpm -qa | grep libselinux-python"
+  register: pkgtest
+  ignore_errors: yes
+  when: ansible_os_family == "RedHat"
+
+# Use this to make sure the conditional in the next task evaluates correctly
+# - debug: var=pkgtest
+
+- name: ensure libselinux-python
+  raw: yum install -y libselinux-python
+  when: ansible_os_family == "RedHat" and pkgtest.stdout_lines < "libselinux-python-2.0.94-5.8.el6.x86_64"
+
+- name: stop iptables
+  service: name=iptables state=stopped
+  when: ansible_os_family == "RedHat"

@@ -1,0 +1,15 @@
+[web]
+10.42.0.[6:7]
+
+[db]
+10.42.0.8
+
+[haproxy]
+10.42.0.100
+
+[centos:children]
+web
+haproxy
+
+[ubuntu:children]
+db

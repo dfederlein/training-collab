@@ -1,0 +1,4 @@
+---
+- name: disable ufw
+  ufw: state=enabled policy=allow
+  when: ansible_os_family == "Debian"
